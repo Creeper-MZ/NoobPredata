@@ -2,6 +2,7 @@ import os
 
 import pandas as pd
 from huggingface_hub import hf_hub_download
+from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModel
 import onnxruntime as ort
 import numpy as np
@@ -85,10 +86,12 @@ class WD14:
         supported_formats = ('.jpg', '.jpeg', '.png', '.webp')
         result = {}
         for root, _, files in os.walk(folder_path):
+            processingbar=tqdm(initial=0,unit='it',total=len(files))
             for file in files:
                 if file.lower().endswith(supported_formats):
                     image_path = os.path.join(root, file)
                     result[file] = self.process_image(image_path)
+                processingbar.update(1)
         return result
 
 

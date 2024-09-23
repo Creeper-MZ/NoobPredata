@@ -1,6 +1,7 @@
 
 import os
 from huggingface_hub import hf_hub_download
+from tqdm import tqdm
 from transformers import AutoModel
 import shutil
 from config import AESTHETIC
@@ -61,10 +62,12 @@ class Aesthetic:
         supported_formats = ('.jpg', '.jpeg', '.png', '.webp')
         result = {}
         for root, _, files in os.walk(folder_path):
+            processbar=tqdm(total=len(files),unit='it')
             for file in files:
                 if file.lower().endswith(supported_formats):
                     image_path = os.path.join(root, file)
                     result[file] = self.process_image(image_path)
+                processbar.update(1)
         return result
 
 

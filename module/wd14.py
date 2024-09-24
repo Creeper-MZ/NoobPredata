@@ -1,3 +1,4 @@
+import copy
 import os
 
 import pandas as pd
@@ -93,6 +94,16 @@ class WD14:
                     result[file] = self.process_image(image_path)
                 processingbar.update(1)
         return result
+    def __deepcopy__(self, memo):
+
+        new_instance = WD14(self.wd14model, self.threshold, self.char_threshold)
+        
+        for k, v in self.__dict__.items():
+            if k != 'onnx_model':
+                setattr(new_instance, k, copy.deepcopy(v, memo))
+        new_instance.onnx_model = self.onnx_model
+        
+        return new_instance
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ import torch.amp.autocast_mode
 from PIL import Image
 import os
 
-from config import PROCESSED_DATA_DIR, RAW_DATA_DIR, TAG_OUT_DIR
+from config import PROCESSED_DATA_DIR, RAW_DATA_DIR, TAG_OUT_DIR, HF_TOKEN
 torch.set_default_device("cuda")
 CLIP_PATH = "google/siglip-so400m-patch14-384"
 VLM_PROMPT = "A descriptive caption for this image:\n"
@@ -19,7 +19,7 @@ project_root = os.path.dirname(os.path.abspath(__file__)).split("module")[0]
 CHECKPOINT_PATH = os.path.join(project_root,'model',"joytag")
 
 #hf_token = os.environ.get("HF_TOKEN", None)
-hf_token = "TOKEN"
+hf_token = HF_TOKEN
 class ImageAdapter(nn.Module):
     def __init__(self, input_features: int, output_features: int):
         super().__init__()

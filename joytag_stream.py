@@ -198,4 +198,4 @@ if __name__ == "__main__":
             with open(tag_file_path_test, 'w', encoding='utf-8') as file:
                 file.write(result)
                 num += 1
-            print(f"已处理{num}张图片")
+        print(f"已处理{num}张图片")

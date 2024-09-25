@@ -8,6 +8,7 @@ from waifuc.model import ImageItem
 from config import WD14MODEL, AESTHETIC
 from module.wd14 import WD14
 from module.aesthetic_rating import Aesthetic
+from module.joytagAction import JoytagAction
 from waifuc.action import FilterSimilarAction, TaggingAction
 from waifuc.export import SaveExporter
 from waifuc.source import LocalSource
@@ -94,7 +95,7 @@ if __name__ == '__main__':
         ScoreLabelAction(AESTHETIC),
         ScoreFilterAction(save=True),
         FilterSimilarAction(),
-        #TaggingAction(method="deepdanbooru")
-        TagProcessAction(WD14MODEL,save_txt=True)
+        TagProcessAction(WD14MODEL),
+        #JoytagAction(device="cuda")
     )
     source.export(SaveExporter(PROCESSED_DATA_DIR))
